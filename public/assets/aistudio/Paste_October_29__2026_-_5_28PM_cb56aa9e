@@ -1,0 +1,1182 @@
+# MASTER DEVELOPMENT PROMPT
+# DETEKTIF CILIK 3D: MISTERI KOTAK HILANG
+
+## PROJECT OVERVIEW
+
+Act as a senior 3D web game developer, full-stack engineer, educational game designer, UI/UX designer, and special education instructional designer.
+
+Build a complete, playable, three-dimensional educational adventure game called:
+
+**DETEKTIF CILIK 3D: MISTERI KOTAK HILANG**
+
+This is an individual university assignment product for HPPK 2 in Malaysia. It is a digital teaching and learning aid (Bahan Bantu Belajar, BBB) intended for pupils with special educational needs (MBPK), initially focusing on the learning difficulties category.
+
+The game must combine:
+- Genuine 3D exploration.
+- Third-person character movement.
+- Interactive school environments.
+- Story-driven detective missions.
+- Reading and sentence-comprehension activities.
+- Evidence collection and mystery solving.
+- Adaptive educational assistance.
+- Positive behavioural reinforcement.
+- Socio-emotional support.
+- Baseline and post-intervention assessments.
+- Teacher dashboard and progress tracking.
+- Secure Supabase data persistence.
+- GitHub source control.
+- Render production deployment.
+
+IMPORTANT: This must be a genuinely playable 3D game, not a 2D game, a static 3D illustration, a simple quiz with a 3D background, or a mockup.
+
+The player must be able to move a 3D character through a three-dimensional school environment, interact with objects in that world, collect clues, unlock missions, and complete the mystery.
+
+Build the actual application. Do not stop after creating a plan, wireframe, or documentation.
+
+The initial learning focus is reading and understanding simple written sentences. This focus is provisional and must remain configurable until actual pupil observation data confirms the appropriate learning target.
+
+Do not fabricate real pupil observations, baseline results, assessment scores, or claims that the intervention is effective.
+
+---
+
+# 1. REQUIRED TECHNOLOGY STACK
+
+Use the following technologies:
+
+### Frontend and 3D engine
+- React.
+- TypeScript.
+- Vite.
+- Three.js.
+- React Three Fiber.
+- @react-three/drei.
+- Lucide React icons.
+- Tailwind CSS or clean modular CSS for the interface.
+
+Use React Three Fiber to create the actual 3D game world.
+
+Do not use a static image as the game environment.
+
+### Application state
+Use React state and a maintainable state-management approach for:
+- Player position.
+- Character movement.
+- Camera position.
+- Current mission.
+- Object interaction.
+- Evidence collection.
+- Mission progression.
+- Assistance level.
+- Assessment responses.
+- Game-session status.
+
+Use a lightweight state-management library only if it is genuinely useful.
+
+### Persistent database
+- Supabase Auth for teacher authentication.
+- Supabase PostgreSQL for persistent learner profiles, sessions, responses, and assessment records.
+- LocalStorage only for non-sensitive temporary UI state or clearly labelled offline drafts.
+
+Supabase must be the primary production database, not an optional replacement for LocalStorage.
+
+### Source control
+- Git.
+- GitHub repository.
+
+### Production hosting
+- Render Static Site for the built Vite application.
+
+The final application must be deployable from GitHub to Render.
+
+Do not use paid APIs or external AI services during gameplay.
+
+---
+
+# 2. GAME ART STYLE AND 3D VISUAL IDENTITY
+
+Create a polished, colourful, low-poly 3D adventure game.
+
+The visual quality should resemble a small, friendly exploration game rather than a basic school assignment demo.
+
+### Visual direction
+
+Use:
+- A fully modelled three-dimensional school environment.
+- A third-person camera following the player.
+- A stylised low-poly detective character.
+- A small companion character that provides encouragement.
+- Three-dimensional desks, chairs, bookshelves, schoolbags, tables, books, boxes, and other school objects.
+- A school hallway connecting different locations.
+- Doors that lead to accessible mission areas.
+- Realistic spatial relationships between objects.
+- Soft shadows, ambient lighting, and clear material colours.
+- Interactive objects with a visible outline, glow, or other accessibility-friendly highlight.
+- Smooth character movement and camera transitions.
+- A polished 3D main menu and mission-completion screen.
+
+Use a consistent colour palette:
+- Deep navy.
+- Teal.
+- Warm yellow.
+- Light cream.
+- Restrained coral accents.
+
+Make the game feel welcoming and calm.
+
+Avoid excessive visual effects, flashing lights, distracting animations, or unnecessarily complex scenery.
+
+### 3D asset strategy
+
+Generate the initial 3D models using Three.js geometry, reusable React Three Fiber components, and procedural low-poly modelling.
+
+The character can be constructed from simple 3D meshes with a recognisable detective appearance, including a hat, body, arms, legs, and magnifying glass.
+
+Build the environment from reusable 3D components:
+- Walls.
+- Floors.
+- Doors.
+- Windows.
+- Furniture.
+- Bookshelves.
+- Books.
+- School equipment.
+- Interactive clue objects.
+
+Do not depend on missing external 3D models or unreliable asset URLs.
+
+If suitable properly licensed GLB or GLTF models are available, they may be added as optional enhancements. The game must remain functional without them.
+
+Use original or appropriately licensed visual assets. Document any third-party assets and their licences.
+
+### Important distinction
+
+The main game world must be 3D.
+
+The menus, sentence cards, evidence notebook, assessment screens, and teacher dashboard may use conventional 2D interface elements layered over the 3D scene. This is intentional because written instructions must remain clear and accessible.
+
+Do not replace the navigable 3D environment with a 2D map as the main gameplay.
+
+---
+
+# 3. THIRD-PERSON PLAYER MOVEMENT
+
+Implement a real, controllable 3D player character.
+
+### Desktop controls
+
+- W: move forward.
+- S: move backward.
+- A: move left.
+- D: move right.
+- Arrow keys: alternative movement controls.
+- Mouse: interact with clickable objects or interface elements.
+- E: interact with a nearby object.
+- Space: optional interaction or confirm action, where appropriate.
+- Escape: pause or close the current interaction panel.
+
+Prevent page scrolling when the relevant game controls are active.
+
+### Mobile and tablet controls
+
+Implement:
+- A virtual joystick or accessible directional control.
+- A large interaction button.
+- Touch-friendly menus and evidence cards.
+- A responsive third-person camera.
+- A pause button.
+
+Do not require a physical keyboard to complete the game.
+
+### Camera
+
+Use a third-person follow camera.
+
+The camera must:
+- Follow the character smoothly.
+- Maintain a useful viewing angle.
+- Avoid clipping through walls where practical.
+- Keep the character and important nearby objects visible.
+- Support controlled camera rotation if it can be implemented reliably.
+- Return to a suitable view after entering a room.
+
+Do not use an uncontrolled first-person camera.
+
+### Collision and movement
+
+Implement basic collision detection.
+
+The player must not walk through:
+- Walls.
+- Closed doors.
+- Large furniture.
+- Bookshelves.
+- Other important solid obstacles.
+
+Use simple collision boundaries or an appropriate lightweight collision system.
+
+Ensure the character cannot leave the playable world or fall indefinitely through the floor.
+
+Character movement should be smooth, with sensible acceleration or interpolation.
+
+### Interaction system
+
+When the character approaches an interactive object:
+- Highlight the object.
+- Display a short interaction prompt.
+- Allow interaction using E, mouse click, or touch.
+- Open the relevant learning activity or clue panel.
+
+Do not force the player to click tiny objects.
+
+The interaction distance must be configurable.
+
+---
+
+# 4. WORLD DESIGN: A MALAYSIAN PRIMARY SCHOOL
+
+Create one connected school environment with three main investigation areas and a hallway.
+
+The locations are:
+
+1. Bilik Darjah — Classroom.
+2. Kantin — Canteen.
+3. Perpustakaan — Library.
+
+The school should have:
+- A recognisable entrance or central hallway.
+- A visible floor plan through environmental landmarks.
+- Three-dimensional furniture and decorations.
+- Clear doorways and navigable routes.
+- Lighting that distinguishes the rooms without making them visually confusing.
+- Interactive objects that make sense within their environment.
+
+The pupil must physically move through the environment.
+
+Use doors, room transitions, or a seamless connected layout to move between locations.
+
+The school map can be provided as a secondary navigation screen, but it must not replace 3D exploration.
+
+### Mission unlocking
+
+Initially, the classroom mission is available.
+
+After completing the required classroom activities, the canteen mission becomes available.
+
+After the required canteen activities, the library mission becomes available.
+
+The final evidence-board challenge becomes available after the required clues have been collected.
+
+Allow previously completed missions to be revisited for practice.
+
+Never permanently block the pupil from learning because of incorrect answers.
+
+---
+
+# 5. STORY: MISTERI KOTAK HILANG
+
+The story takes place in a fictional Malaysian school.
+
+A blue box containing art materials has been misplaced after an art activity.
+
+The pupil becomes Detektif Cilik and must investigate where the box was left.
+
+The story must remain consistent from beginning to end.
+
+### Core clues
+
+Clue 1:
+"Ali membawa kotak biru keluar dari bilik darjah selepas kelas seni."
+
+Clue 2:
+"Selepas melalui kantin, Ali pergi ke perpustakaan."
+
+Clue 3:
+"Kotak biru diletakkan di sebelah rak buku."
+
+The final solution is:
+
+**Kotak biru berada di sebelah rak buku di perpustakaan.**
+
+Do not introduce contradictory clues.
+
+Do not reveal the complete solution before the final investigation.
+
+The pupil should gradually discover the information through interactive activities.
+
+All story characters and events are fictional educational content.
+
+---
+
+# 6. MAIN MENU AND GAME FLOW
+
+Create the following screens.
+
+### A. Main menu
+
+Display:
+- Game title.
+- A 3D school environment in the background.
+- The detective character.
+- Start Mission.
+- Continue Mission.
+- Accessibility Settings.
+- Teacher Login.
+- Short story introduction.
+
+Continue Mission must restore saved progress when an authorised session exists.
+
+Start Mission must ask for confirmation before replacing unfinished progress.
+
+Do not request a pupil's real name or personal identification details.
+
+### B. Tutorial mission
+
+Create a playable tutorial in a small part of the 3D school.
+
+Teach the pupil how to:
+1. Move the detective.
+2. Approach an object.
+3. Interact with an object.
+4. Read the sentence card.
+5. Open the evidence notebook.
+6. Request assistance.
+7. Return to the school hallway.
+
+Use simple instructions and visual demonstrations.
+
+The tutorial should not affect official baseline scores.
+
+### C. Mission briefing
+
+Before each mission, display:
+- Mission title.
+- One-sentence objective.
+- A short story dialogue.
+- The main task.
+- A Start Mission button.
+
+Keep the instructions short and age-appropriate.
+
+---
+
+# 7. MISSION 1: BILIK DARJAH — CARI PETUNJUK PERTAMA
+
+### Learning objective
+
+Practise understanding simple written sentences describing objects, actions, and spatial relationships.
+
+### Environment
+
+Build a fully navigable 3D classroom containing:
+- Teacher's desk.
+- Student desks.
+- Chairs.
+- Schoolbags.
+- Bookshelves.
+- Books.
+- Noticeboard.
+- Windows.
+- A few decorative classroom objects.
+
+The important objects must be interactive.
+
+### Gameplay
+
+The player walks around the classroom.
+
+When approaching a relevant object, the game provides a prompt such as:
+
+"Periksa meja guru."
+
+The pupil then receives a sentence task.
+
+Example:
+
+"Buku merah berada di bawah meja."
+
+Display three answer choices with clear visual representations:
+- A red book under a desk.
+- A red book on a desk.
+- A red book beside a desk.
+
+The pupil must select the scene that matches the sentence.
+
+Where appropriate, use the actual 3D environment as the answer space instead of always displaying three static pictures.
+
+Create at least three different learning interactions:
+1. Find an object from a sentence.
+2. Identify an object based on a spatial relationship.
+3. Match a sentence to an appropriate scene.
+
+Do not make all tasks identical.
+
+### First clue
+
+After the required activities are completed, the pupil discovers a note:
+
+"Ali membawa kotak biru keluar dari bilik darjah selepas kelas seni."
+
+Add this clue to the evidence notebook.
+
+Show a short, satisfying discovery animation.
+
+---
+
+# 8. MISSION 2: KANTIN — SUSUN PETUNJUK
+
+### Learning objective
+
+Practise understanding simple written information and sequencing events.
+
+### Environment
+
+Build a navigable 3D canteen containing:
+- Tables and chairs.
+- Food counter.
+- Trays.
+- School bags.
+- Noticeboard.
+- Other suitable school objects.
+
+### Gameplay
+
+The pupil enters the canteen and investigates the area.
+
+Provide at least three varied learning tasks.
+
+Example task types:
+
+1. Read a sentence and identify the correct location.
+2. Arrange three events in the correct order.
+3. Match a written statement to a scene.
+
+Example sequencing activity:
+
+- Ali membawa kotak keluar dari bilik darjah.
+- Ali melalui kantin.
+- Ali pergi ke perpustakaan.
+
+The pupil arranges the events in chronological order.
+
+Allow drag-and-drop or tap-to-select ordering. Provide an accessible alternative to dragging.
+
+After completing the tasks, reveal the second clue:
+
+"Selepas melalui kantin, Ali pergi ke perpustakaan."
+
+Save it in the evidence notebook.
+
+The pupil must physically navigate the 3D environment between relevant objects before the mission is complete.
+
+---
+
+# 9. MISSION 3: PERPUSTAKAAN — CARI KOTAK
+
+### Learning objective
+
+Practise identifying a location from a written sentence and using information to solve a problem.
+
+### Environment
+
+Build a three-dimensional library containing:
+- Multiple bookshelves.
+- Reading tables.
+- Chairs.
+- Book displays.
+- A reading corner.
+- Several interactive objects.
+- The hidden blue box.
+
+### Gameplay
+
+The player explores the library.
+
+Provide at least three varied learning tasks.
+
+Example:
+
+"Kotak biru berada di sebelah rak buku."
+
+The pupil must inspect the appropriate location and identify the box.
+
+Make the task require understanding the sentence rather than simply clicking a glowing object.
+
+The final clue must be discovered only after the required activities.
+
+Reveal:
+
+"Kotak biru diletakkan di sebelah rak buku."
+
+Add the clue to the evidence notebook.
+
+---
+
+# 10. FINAL MISSION: PAPAN BUKTI DETEKTIF
+
+This is the final reasoning challenge.
+
+Do not simply reveal the blue box and ask the pupil to click it.
+
+Display the collected evidence in an interactive notebook or evidence-board interface.
+
+The pupil must:
+
+1. Review the clue from the classroom.
+2. Review the clue from the canteen.
+3. Review the clue from the library.
+4. Select the correct location on a simple school map.
+5. Identify which clue supports the decision.
+6. Confirm the solution.
+
+The final answer must be supported by the story evidence.
+
+When the pupil chooses the correct solution, play a short 3D celebration animation and show the box being found.
+
+Display:
+
+"Tahniah, Detektif Cilik! Kamu berjaya menyelesaikan kes berdasarkan petunjuk yang dikumpulkan."
+
+The pupil then receives a case-completion badge.
+
+Do not display public rankings or compare the pupil with other pupils.
+
+---
+
+# 11. ADAPTIVE ASSISTANCE SYSTEM
+
+Implement a rule-based assistance system inspired by scaffolding.
+
+The system must distinguish independent responses from responses made after assistance.
+
+### Level 0: Independent attempt
+
+Show the original sentence.
+
+Allow the pupil to attempt the task without a hint.
+
+Record the first response before providing assistance.
+
+### Level 1: Visual highlighting
+
+Highlight the relevant word or phrase.
+
+Example:
+
+"Buku merah berada **di bawah meja**."
+
+Do not reveal the correct answer automatically.
+
+### Level 2: Sentence segmentation
+
+Break the sentence into meaningful parts.
+
+Example:
+- Buku merah.
+- Berada di bawah meja.
+
+Use simple visual support.
+
+### Level 3: Worked example
+
+Show an example of how to understand a similar sentence.
+
+Then allow the pupil to attempt a new or equivalent task.
+
+Do not count the modelled example as an independent response.
+
+### Adaptive rules
+
+- Record the first response separately.
+- Record each subsequent attempt.
+- Record the highest assistance level used.
+- Record whether the final response was correct.
+- Provide encouragement after incorrect answers.
+- Offer a break or a simpler equivalent task after repeated difficulty.
+- Allow the teacher to configure progression thresholds.
+- Unlock harder tasks only when appropriate.
+- Never use punitive lives or humiliating failure messages.
+
+A correct answer after assistance must not be recorded as an independent correct answer.
+
+If the pupil succeeds repeatedly without assistance, the game may gradually introduce more challenging tasks.
+
+This must be implemented through transparent rules rather than an external AI system.
+
+---
+
+# 12. POSITIVE REINFORCEMENT AND SOCIO-EMOTIONAL SUPPORT
+
+Apply positive reinforcement inspired by B. F. Skinner.
+
+Examples:
+- "Bagus! Kamu berjaya mencari petunjuk."
+- "Usaha yang baik. Mari cuba sekali lagi."
+- "Kamu menggunakan bukti untuk menyelesaikan kes."
+- "Tidak mengapa jika belum betul. Kita cuba bersama-sama."
+
+Reward meaningful learning behaviours:
+- Careful reading.
+- Independent attempts.
+- Appropriate requests for help.
+- Reviewing evidence.
+- Trying again after an error.
+
+Do not reward speed at the expense of understanding.
+
+Apply socio-emotional support inspired by Erik Erikson:
+- Friendly characters.
+- Achievable tasks.
+- Opportunities to retry.
+- Positive and specific feedback.
+- Optional requests for help.
+- An optional pause or break.
+
+The game should avoid unnecessary sensory overload.
+
+Provide:
+- Adjustable text size.
+- Optional sound.
+- Reduced-motion mode.
+- Clear interaction prompts.
+- A predictable navigation structure.
+
+Do not claim that these features diagnose or treat an emotional or developmental condition.
+
+---
+
+# 13. LEARNING LEVELS
+
+Create three configurable learning levels.
+
+### Level 1: Kenali Maklumat
+- Identify objects.
+- Understand simple action words.
+- Identify basic spatial relationships.
+- Read or interpret short sentences.
+
+### Level 2: Fahami Ayat
+- Understand slightly longer sentences.
+- Match written information to a scene.
+- Distinguish between similar answer choices.
+- Arrange events in sequence.
+
+### Level 3: Gabungkan Petunjuk
+- Review two or more clues.
+- Select a location supported by the evidence.
+- Identify the clue that supports the answer.
+
+The teacher can choose the initial level.
+
+Use configurable thresholds for progression.
+
+The game must not automatically diagnose the pupil or claim that a suggested level is a validated assessment.
+
+---
+
+# 14. BASELINE AND POST-INTERVENTION ASSESSMENTS
+
+Create a separate assessment module accessible through the Teacher Dashboard.
+
+This module is essential for the HPPK 2 assignment.
+
+### Baseline assessment
+
+Create 10 items assessing the selected sentence-comprehension skills.
+
+Each item must include:
+- A sentence in Bahasa Melayu.
+- Three answer choices.
+- One unambiguously correct answer.
+- An item identifier.
+- A target skill.
+- A difficulty level.
+
+Example:
+
+Sentence:
+"Bola berada di bawah kerusi."
+
+Answer choices:
+- Ball under a chair.
+- Ball on a chair.
+- Ball beside a chair.
+
+Do not automatically provide hints before the first response.
+
+### Post-intervention assessment
+
+Create 10 different items with comparable difficulty and target skills.
+
+Do not simply repeat the baseline questions.
+
+Both assessment forms must be configurable in a central question-bank file.
+
+### Assessment rules
+
+- Record the first response.
+- Record correctness.
+- Record unanswered items.
+- Do not count assisted responses as independent responses.
+- Display results only after the assessment is completed.
+- Use equivalent assessment procedures before and after intervention.
+- Label the results as performance on the application's sentence-comprehension tasks.
+- Do not claim the assessments are psychometrically validated.
+
+### Oral-reading observation
+
+Provide a separate teacher observation form for actual oral-reading performance, if this is part of the confirmed learning target.
+
+Record:
+- Total words presented.
+- Number of words read correctly.
+- Assistance level.
+- Observable reading errors.
+- Optional observation notes.
+
+Calculate:
+
+Accuracy (%) = (Correctly read words / Total words presented) × 100.
+
+Handle missing data and zero denominators safely.
+
+Do not infer oral-reading accuracy from clicking the correct picture.
+
+---
+
+# 15. TEACHER DASHBOARD
+
+Create a functional teacher dashboard outside the 3D gameplay.
+
+The dashboard should use a clear, professional interface.
+
+### Authentication
+
+Use Supabase Auth.
+
+Teachers must sign in before accessing learner records.
+
+Pupils must not need to enter personal information to play through an authorised teacher session.
+
+### Learner profiles
+
+Allow teachers to create and select learner profiles using pseudonymous learner codes.
+
+Do not require:
+- Real names.
+- Identification numbers.
+- Photographs.
+- Unnecessary diagnostic information.
+
+### Session management
+
+Teachers can:
+- Start a baseline assessment.
+- Start a game intervention session.
+- Start a post-intervention assessment.
+- Review previous sessions.
+- Resume a saved session.
+- Export records.
+- Delete records with confirmation.
+
+### Progress dashboard
+
+Display:
+- Missions completed.
+- Assessment items attempted.
+- Correct first responses.
+- Correct responses after assistance.
+- Incorrect or unanswered items.
+- Number of hints used.
+- Highest assistance level.
+- Baseline percentage.
+- Post-intervention percentage.
+- Difference in percentage points.
+
+Only display comparisons when the necessary actual data are available.
+
+Do not pre-populate fake pupil records or fabricated baseline scores.
+
+### Teacher interpretation
+
+Use neutral language.
+
+Example:
+
+"Ketepatan jawapan meningkat daripada sesi awal kepada sesi susulan. Semak juga tahap bantuan yang diperlukan sebelum membuat kesimpulan tentang penguasaan berdikari."
+
+Do not claim that the game alone caused an improvement.
+
+### Export
+
+Implement working functions to:
+- Export CSV.
+- Export JSON.
+- Print a clean teacher report.
+
+---
+
+# 16. SUPABASE: REQUIRED PRODUCTION DATABASE
+
+Supabase is mandatory as the primary production database.
+
+Do not silently replace Supabase with LocalStorage.
+
+Use:
+- Supabase Auth.
+- Supabase PostgreSQL.
+- Row Level Security.
+- Proper ownership policies.
+
+### Environment variables
+
+Use:
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_ANON_KEY
+
+Use only the public publishable/anon key in frontend code.
+
+Never expose the service-role key in frontend code, GitHub, or browser bundles.
+
+### Database schema
+
+Create SQL migrations for these tables:
+
+1. learner_profiles
+2. game_sessions
+3. task_responses
+4. assessment_results
+5. oral_reading_observations
+
+Include suitable:
+- UUID primary keys.
+- Foreign keys.
+- Owner identifiers.
+- Timestamps.
+- Assessment types.
+- Mission identifiers.
+- Item identifiers.
+- First-response correctness.
+- Assistance levels.
+- Final correctness.
+- Completion status.
+
+Create suitable indexes and constraints.
+
+### Security requirements
+
+Enable Row Level Security on every table containing learner or session records.
+
+Teachers must only be able to access records they own.
+
+Policies must verify ownership for related records. A teacher must not be able to attach a response to another teacher's session or access another teacher's learner records.
+
+Require teacher authentication for protected operations.
+
+Do not create unrestricted public access to learner records.
+
+Do not store unnecessary personal information.
+
+### Data persistence
+
+When a session starts:
+- Create a session record in Supabase.
+- Save responses and assistance levels as the pupil progresses.
+- Save mission completion.
+- Save assessment results.
+- Restore authorised saved progress after refreshing or signing in again.
+
+Use proper asynchronous database operations.
+
+Display:
+- Saving...
+- Saved to cloud.
+- Save failed — please retry.
+
+Never claim that a save operation succeeded unless Supabase confirms it.
+
+Implement retry handling without creating duplicate records.
+
+If Supabase is not configured:
+- Allow development preview using clearly labelled demo mode.
+- Do not allow real pupil records to be saved as if cloud storage were active.
+- Display a clear configuration message.
+- Never silently pretend that data has been saved.
+
+LocalStorage may hold temporary UI state or an explicitly labelled offline draft. It must not be the primary production database.
+
+### Data privacy
+
+- Do not collect voice recordings.
+- Do not send pupil data to external AI services.
+- Do not put private learner information in URL parameters.
+- Do not log sensitive information to the browser console.
+- Provide authorised export and deletion.
+- Document appropriate consent, access, and data-handling safeguards.
+
+---
+
+# 17. HPPK 2 THEORY INTEGRATION
+
+Create a teacher-facing section called "Pemetaan Pedagogi".
+
+Explain the following theoretical applications.
+
+### Vygotsky — Cognitive development
+
+Implement ZPD and scaffolding through:
+- Graduated difficulty.
+- Visual hints.
+- Sentence segmentation.
+- Worked examples.
+- Gradual reduction of assistance.
+
+### Skinner — Behavioural learning
+
+Implement operant conditioning through:
+- Immediate feedback.
+- Specific positive reinforcement.
+- Recognition of independent attempts.
+- Encouragement to retry.
+
+### Erikson — Socio-emotional development
+
+Support a positive learning environment through:
+- Achievable challenges.
+- Friendly characters.
+- Opportunities to retry.
+- Non-humiliating feedback.
+- Optional requests for help and breaks.
+
+### Information processing
+
+Support attention and working memory through:
+- Short instructions.
+- One task at a time.
+- Consistent interface layouts.
+- Clear visual grouping.
+- Limited distracting effects.
+
+Do not claim that all pupils with learning difficulties have identical needs.
+
+The teacher-facing section must explain which game features correspond to each theory and why they were selected.
+
+---
+
+# 18. KPPB, 3E, AND DIGITAL ETHICS
+
+The game must provide evidence of the following educational elements.
+
+### Engagement
+- Three-dimensional exploration.
+- Mission objectives.
+- Evidence collection.
+- Interactive objects.
+- Story-driven progression.
+
+### Enhancement
+- Adaptive assistance.
+- Progressive difficulty.
+- Feedback.
+- Baseline and post-intervention assessment.
+- Teacher monitoring.
+
+### Extension
+Create an optional real-world follow-up activity.
+
+Example:
+
+The teacher gives the pupil a simple written instruction, such as:
+
+"Letakkan buku di atas meja."
+
+The teacher records whether the pupil applies the skill outside the game.
+
+Do not pre-fill a successful outcome.
+
+### Communication
+
+Provide:
+- Clear Bahasa Melayu instructions.
+- Readable dialogue.
+- Consistent terminology.
+- Opportunities for teacher-pupil discussion.
+- Teacher observation records.
+
+### Integrity and professionalism
+
+Provide:
+- Original or appropriately licensed assets.
+- Attribution for third-party resources.
+- Documentation of AI-assisted development.
+- Privacy safeguards.
+- Accurate reporting.
+- No fabricated pupil data.
+- No unsupported claims of effectiveness.
+
+---
+
+# 19. GITHUB INTEGRATION
+
+Prepare the project for GitHub source control.
+
+Requirements:
+- Clean source-code structure.
+- package.json.
+- package-lock.json.
+- .gitignore.
+- .env.example with placeholder values only.
+- README.md.
+- Render configuration.
+- Supabase SQL migrations.
+
+Do not commit secrets or actual learner data.
+
+Use the main branch as the production branch.
+
+If GitHub integration is available and authorised, connect the project to the repository.
+
+If account authorisation is required, prepare the files and give me the exact steps to connect or push the code.
+
+Never claim the project has been pushed to GitHub unless the operation succeeds.
+
+---
+
+# 20. RENDER DEPLOYMENT
+
+The application must be deployable as a Render Static Site.
+
+Use a suitable Render Blueprint configuration, for example:
+
+- Runtime: static.
+- Build command: npm ci && npm run build.
+- Publish directory: dist.
+- SPA rewrite: /* to /index.html.
+
+Create render.yaml where appropriate.
+
+Document the following steps:
+1. Connect the GitHub repository to Render.
+2. Select the main branch.
+3. Configure the build and publish settings.
+4. Add the Supabase environment variables through Render's dashboard.
+5. Deploy the application.
+6. Test the deployed URL.
+7. Confirm that Supabase reads and writes work.
+8. Enable automatic deployment from GitHub after configuration.
+
+Vite environment variables are available at build time. Document this correctly.
+
+Do not commit production credentials.
+
+Do not claim that deployment is successful until the deployed site has actually been tested.
+
+The game must work on the deployed URL, not just inside the Replit preview.
+
+---
+
+# 21. PERFORMANCE AND ACCESSIBILITY
+
+The game must remain usable on ordinary student laptops and mobile devices.
+
+Implement:
+- Responsive UI.
+- Reasonable 3D model complexity.
+- Efficient rendering.
+- Reusable geometry.
+- Sensible shadow settings.
+- Reduced-motion mode.
+- Adjustable text size.
+- Keyboard navigation.
+- Touch controls.
+- Clear error states.
+- No forced time limits.
+
+If the device cannot handle the preferred graphics settings, reduce shadows or visual effects before compromising the gameplay.
+
+Do not allow a visual effect to block access to the learning activity.
+
+---
+
+# 22. REQUIRED TESTING
+
+Before declaring the project complete, verify:
+
+1. The app starts successfully.
+2. The main menu works.
+3. The 3D world renders correctly.
+4. The character moves in three dimensions.
+5. Camera following works.
+6. Collision and world boundaries work.
+7. Interactive objects respond correctly.
+8. The three mission areas can be entered.
+9. Mission unlocking follows the intended sequence.
+10. The evidence notebook stores clues.
+11. The final solution matches the story.
+12. Assistance levels work.
+13. Independent responses are recorded separately from assisted responses.
+14. Baseline and post-intervention assessments work.
+15. Oral-reading accuracy calculations are correct.
+16. Teacher authentication works.
+17. Row Level Security protects learner records.
+18. Supabase sessions and responses persist after refresh.
+19. CSV and JSON exports work.
+20. The game works on desktop and mobile.
+21. The production build succeeds.
+22. No critical browser-console errors remain.
+23. The Render deployment loads the application.
+24. The deployed application connects securely to Supabase.
+25. No secrets or fabricated learner records appear in the repository.
+
+Add automated tests for critical scoring and database-related logic where practical.
+
+---
+
+# 23. FINAL DELIVERABLES
+
+Deliver:
+
+1. A complete playable 3D educational adventure game.
+2. A navigable third-person school environment.
+3. Interactive classroom, canteen, and library missions.
+4. Evidence collection and final mystery-solving mechanics.
+5. Adaptive assistance and positive reinforcement.
+6. Baseline and post-intervention assessments.
+7. Teacher authentication and dashboard.
+8. Supabase database schema and Row Level Security policies.
+9. GitHub-ready source code.
+10. Render deployment configuration.
+11. Environment-variable documentation.
+12. README with setup and deployment instructions.
+13. Testing checklist.
+14. A mapping of game features to HPPK 2 theories, KPPB, 3E, and digital ethics.
+15. A list of features that have been implemented and tested versus features that still require account configuration.
+
+# FINAL EXECUTION INSTRUCTION
+
+Start by inspecting the current project and its dependencies.
+
+Then implement the game in functional stages:
+
+Stage 1: Build and test the 3D world, character movement, camera, and interactions.
+
+Stage 2: Implement all missions, clues, evidence collection, and the final mystery.
+
+Stage 3: Implement assistance, feedback, and the assessment modules.
+
+Stage 4: Implement teacher authentication, Supabase storage, and database security.
+
+Stage 5: Prepare GitHub and Render deployment configurations.
+
+Stage 6: Run the tests, fix errors, and document the actual results.
+
+Do not stop after producing a plan.
+
+Do not leave essential gameplay as placeholder buttons.
+
+Do not claim that an unimplemented feature works.
+
+Prioritise a coherent, playable 3D MVP over unnecessary visual complexity.
+
+If a feature cannot be completed, explain the limitation and implement the simplest reliable alternative.
+
+Begin implementation now.

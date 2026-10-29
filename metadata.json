@@ -1,0 +1,6 @@
+{
+  "name": "Detektif Cilik 3D: Misteri Kotak Hilang",
+  "description": "Bahan Bantu Belajar (BBB) digital 3D pengembaraan pendidikan dan kefahaman ayat untuk Murid Berkeperluan Pendidikan Khas (MBPK).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
